@@ -131,6 +131,12 @@
         }
       },
       "defaultConfiguration": "production"
+    },
+    "codegen-operations": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn graphql-codegen --config codegen.ts --project touchpoint-web"
+      }
     }
   }
 }

@@ -46,6 +46,28 @@
         "production",
         "^production"
       ]
+    },
+    "codegen-operations": {
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/apps/gql/src/app/modules/**/*.graphql.ts",
+        "{workspaceRoot}/libs/**/*.graphql",
+        "{workspaceRoot}/codegen.ts"
+      ],
+      "outputs": [
+        "{workspaceRoot}/apps/touchpoint-web/src/types"
+      ]
+    },
+    "codegen-schema": {
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/apps/gql/src/app/modules/**/*.graphql.ts",
+        "{workspaceRoot}/codegen.ts"
+      ],
+      "outputs": [
+        "{workspaceRoot}/apps/gql/graphql.schema.json",
+        "{workspaceRoot}/apps/gql/schema.graphql"
+      ]
     }
   },
   "plugins": [

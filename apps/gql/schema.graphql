@@ -1,0 +1,25 @@
+type Location {
+  country: String!
+  countryCode: String!
+  latitude: Float!
+  longitude: Float!
+  name: String!
+  timezone: String!
+}
+
+type Query {
+  forecasts(
+    latitude: Float!
+    longitude: Float!
+    timezone: String
+  ): [WeatherForecast]
+  hello: String
+  locations(name: String!): [Location!]
+}
+
+type WeatherForecast {
+  date: String!
+  maximum: Float!
+  minimum: Float!
+  weatherCode: Int!
+}

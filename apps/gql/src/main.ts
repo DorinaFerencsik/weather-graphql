@@ -1,6 +1,6 @@
 import express from 'express';
 import { createSchema, createYoga } from 'graphql-yoga'
-import { resolvers, typeDefs } from './schema';
+import { resolvers, typeDefs } from './modules/forecast/schema/forecast.graphql';
 import { execute, parse, specifiedRules, subscribe, validate } from 'graphql'
 import { useApolloDataSources } from '@envelop/apollo-datasources'
 import { envelop, useEngine, useSchema } from '@envelop/core'

@@ -51,6 +51,12 @@
           "buildTarget": "gql:build:production"
         }
       }
+    },
+    "codegen-schema": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn graphql-codegen --config codegen.ts --project gql"
+      }
     }
   }
 }

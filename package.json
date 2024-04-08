@@ -2,7 +2,10 @@
   "name": "@weather-graphql/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "pregraphql:generate": "yarn nx run gql:codegen-schema",
+    "graphql:generate": "yarn nx run touchpoint-web:codegen-operations"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~17.3.0",
@@ -17,11 +20,13 @@
     "@angular/ssr": "~17.3.0",
     "@envelop/apollo-datasources": "^4.0.0",
     "@envelop/core": "^5.0.0",
+    "@graphql-codegen/introspection": "^4.0.3",
     "apollo-datasource-rest": "^3.7.0",
     "apollo-server-caching": "^3.3.0",
     "axios": "^1.6.0",
     "express": "~4.18.2",
     "graphql": "^16.8.1",
+    "graphql-modules": "^2.3.0",
     "graphql-yoga": "^5.3.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -37,6 +42,9 @@
     "@angular/cli": "~17.3.0",
     "@angular/compiler-cli": "~17.3.0",
     "@angular/language-service": "~17.3.0",
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/fragment-matcher": "5.0.2",
+    "@graphql-codegen/typescript-apollo-angular": "4.0.0",
     "@nx/angular": "^18.2.2",
     "@nx/devkit": "18.2.2",
     "@nx/esbuild": "18.2.2",
@@ -70,6 +78,6 @@
     "prettier": "^2.6.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "~5.4.2"
+    "typescript": "^5.4.4"
   }
 }

@@ -1,5 +1,5 @@
 import { IResolvers } from '@graphql-tools/utils'
-import { getForecasts, getLocations } from './forecast';
+import { getForecasts, getLocations } from '../../../forecast';
 
 export const typeDefs = /* GraphQL */ `
   type Query {
