@@ -27,8 +27,8 @@ if (USE_MODULES) {
       resolvers: {
         Query: {
           hello: () => 'Hello from schema',
-          forecasts: (parent, args, contextValue, info) => {
-            return new ForecastAPI().getForecasts();
+          forecasts: (_, args) => {
+            return new ForecastAPI().getForecasts(args.latitude, args.longitude, args.timezone);
           },
 
         }
