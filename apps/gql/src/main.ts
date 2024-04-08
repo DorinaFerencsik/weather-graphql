@@ -1,5 +1,10 @@
 import express from 'express';
 import { createSchema, createYoga } from 'graphql-yoga'
+import { resolvers, typeDefs } from './schema';
+import { execute, parse, specifiedRules, subscribe, validate } from 'graphql'
+import { useApolloDataSources } from '@envelop/apollo-datasources'
+import { envelop, useEngine, useSchema } from '@envelop/core'
+import { ForecastAPI } from './datasources/forecast-api';
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
@@ -10,20 +15,52 @@ app.get('/', (req, res) => {
   res.send({ message: 'Hello API' });
 });
 
-const yoga = createYoga({
-  schema: createSchema({
-    typeDefs: /* GraphQL */ `
-      type Query {
-        hello: String
-      }
-    `,
-    resolvers: {
-      Query: {
-        hello: () => 'Hello from Yoga!'
-      }
-    }
+
+const USE_MODULES = false;
+
+let yoga;
+
+if (USE_MODULES) {
+  yoga = createYoga({
+    schema: createSchema({
+      typeDefs,
+      resolvers: {
+        Query: {
+          hello: () => 'Hello from schema',
+          forecasts: (parent, args, contextValue, info) => {
+            return new ForecastAPI().getForecasts();
+          },
+
+        }
+      },
+    }),
+    // context: (req) => ({
+    //   ...req,
+    //   dataSource: new ForecastAPI()
+    // }),
+    plugins: [
+      useEngine({ parse, validate, specifiedRules, execute, subscribe }),
+      // useSchema(mySchema),
+      useApolloDataSources({
+        dataSources() {
+          return {
+            forecastAPI: new ForecastAPI()
+          }
+        }
+        // To provide a custom cache, you can use the following code (InMemoryLRUCache is used by default):
+        // cache: new YourCustomCache()
+      })
+    ]
   })
-})
+} else {
+  yoga = createYoga({
+    schema: createSchema({
+      typeDefs,
+      resolvers,
+    }),
+  })
+
+}
 
 app.use(yoga.graphqlEndpoint, yoga)
 
